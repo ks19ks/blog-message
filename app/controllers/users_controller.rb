@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: %i(new create)
 
+  def index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
