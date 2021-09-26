@@ -1,7 +1,12 @@
 <h2>ユーザー</h2>
 <% @users.each do |user| %>
-  <%= user.name %>
-  <%= user.email %>
-  <%= link_to 'Show', user_path(user) %>
-  <%= render 'follow_form', user: user %>
+  <% if user.id != current_user.id %>
+    <div class="item">
+      <%= link_to user.name, user %>
+      <%= link_to 'Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+    </div>
+    <p>
+      <%= render 'follow_form', user: user %>
+    </p>
+  <% end %>
 <% end %>
